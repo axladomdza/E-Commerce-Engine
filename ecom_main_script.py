@@ -4,6 +4,11 @@
 # Sets will be used for unique customer names 
 # Functions will be used for the actions of the customers
 
+
+def place_order():
+    print("You're placing an order. Which Iphone fits best for you:")
+    print()
+
 def main():
     # Dictionary of models in inventory.
     inventory = {
@@ -16,4 +21,10 @@ def main():
 
     unique_customers = set()
     
-    user_order = input("Do you want to")
+    user_direction = input("""Welcome to Apple.com, would you like to:
+        1. Place an order
+        2. View our inventory
+        Please input the number associated with your choice.""")
+
+    
+
