@@ -12,10 +12,10 @@ def place_order():
 def main():
     # Dictionary of models in inventory.
     inventory = {
-        "PROD001": {'model': "Iphone 15 Pro Max", 'storage': "512GB", "price": 600, "stock": 200},
-        "PROD002": {'model': "Iphone 16", "storage" : "128GB", "price": 700, "stock": 200},
-        "PROD003": {'model': "Iphone 16 Pro", "storage" : "256GB", "price": 900}, 
-        "PROD004": {'model': "Iphone 17 Pro Max", "storage": "512GB", "price": 1900}}
+        "PROD001": {'model': "Iphone 15 Pro Max", 'storage': "512GB", "price": 600, "stock": 550},
+        "PROD002": {'model': "Iphone 16", "storage" : "128GB", "price": 700, "stock": 260},
+        "PROD003": {'model': "Iphone 16 Pro", "storage" : "256GB", "price": 900, "stock": 400}, 
+        "PROD004": {'model': "Iphone 17 Pro Max", "storage": "512GB", "price": 1900, "stock": 500}}
 
     order_queue = [] 
 
