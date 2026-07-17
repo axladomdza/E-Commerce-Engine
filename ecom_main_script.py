@@ -5,10 +5,24 @@
 # Functions will be used for the actions of the customers
 
 
-def place_order(inv, queue):
+def place_order(inv):
+    order_process = True
     print("\nYou are placing an order. Here is the selection of products here at Apple:")
-    for product_id, prod_specs in inv.items():
-        print(prod_specs["model"])
+
+    while order_process:
+        for prod_num, (product_id, prod_specs) in enumerate(inv.items(), start =1)  :
+            print(f"{prod_num}. {prod_specs["model"]}")
+            
+        user_order_input = input('Which product would you like to order? (Input the product number)')
+        try:
+            user_order = int(user_order_input)
+        except ValueError:
+            print("\nPlease select a number.")
+            continue
+            
+        if user_order not in list(enumerate(inv, start =1)):
+            print("Please select a number from the list of products." )
+            continue
 
 
 
@@ -43,6 +57,6 @@ Please input the number associated with your choice: """)
             continue
 
         if user_direction == 1:
-            place_order(inventory, order_queue)
+            place_order(inventory)
 
 main()
