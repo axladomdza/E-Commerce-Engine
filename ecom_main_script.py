@@ -7,24 +7,45 @@
 
 def place_order(inv):
     order_process = True
-    print("\nYou are placing an order. Here is the selection of products here at Apple:")
+    username = input("\nYou are placing an order. What's your name? ") 
+
+    print(f"Welcome {username}! Here is the selection of products here at Apple:")
 
     while order_process:
-        for prod_num, (product_id, prod_specs) in enumerate(inv.items(), start =1)  :
+    #Printing product list and prompting user to choose
+        for prod_num, (product_id, prod_specs) in enumerate(inv.items(), start =1):
+            print(prod_specs)
             print(f"{prod_num}. {prod_specs["model"]}")
-            
-        user_order_input = input('Which product would you like to order? (Input the product number)')
+        user_order_input = input('Which product would you like to order? (Input the product number):  ')
         try:
             user_order = int(user_order_input)
         except ValueError:
             print("\nPlease select a number.")
             continue
-            
-        if user_order not in list(enumerate(inv, start =1)):
-            print("Please select a number from the list of products." )
+
+    #Error handling user input
+        if 1 <= user_order <= len(inv):
+            print("\nNumber found." )
+        else:
+            print("\nPlease input a number from the list of products.")
             continue
 
+    #Describing info to user from product
+        user_prod = inv[user_order]
+        print(f"""You chose the {user_prod["model"]}. 
+Storage: {user_prod["storage"]}
+Price: {user_prod["price"]}
+""")
+        if user_prod["stock"] < 100:
+            print(f"Hurry, only {user_prod["stock"]} left in stock!")
+        else: 
+            print(f"{user_prod["stock"]} left in stock.")
 
+        order_yn = input("Would you like to order this item? (y/n)")
+        if order_yn == "y":
+            
+            
+        
 
 
 running = True  #introducing a variable to loop the main function
