@@ -16,22 +16,22 @@ def place_order(inv):
         for prod_num, (product_id, prod_specs) in enumerate(inv.items(), start =1):
             print(prod_specs)
             print(f"{prod_num}. {prod_specs["model"]}")
-        user_order_input = input('Which product would you like to order? (Input the product number):  ')
+        order_num_input = input('Which product would you like to order? (Input the product number):  ')
         try:
-            user_order = int(user_order_input)
+            order_num = int(order_num_input)
         except ValueError:
             print("\nPlease select a number.")
             continue
 
     #Error handling user input
-        if 1 <= user_order <= len(inv):
+        if 1 <= order_num <= len(inv):
             print("\nNumber found." )
         else:
             print("\nPlease input a number from the list of products.")
             continue
 
     #Describing info to user from product
-        user_prod = inv[user_order]
+        user_prod = inv[order_num]
         print(f"""You chose the {user_prod["model"]}. 
 Storage: {user_prod["storage"]}
 Price: {user_prod["price"]}
@@ -43,7 +43,11 @@ Price: {user_prod["price"]}
 
         order_yn = input("Would you like to order this item? (y/n)")
         if order_yn == "y":
+            print(f"Order placed. Thank you {username}!")
+            user_order = (username, inv[order_num])
             
+        if order_yn == "n":
+            continue 
             
         
 
