@@ -87,7 +87,10 @@ Please input the number associated with your choice: """)
             continue
 
         if user_direction == 1:
-            place_order(inventory)
-            order_queue.append(user_order)
+            user_order = place_order(inventory)
+            if user_order is not None:
+                order_queue.append(user_order)
+                continue
+                
 
 main()
