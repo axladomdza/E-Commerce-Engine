@@ -41,10 +41,13 @@ Price: {user_prod["price"]}
         else: 
             print(f"{user_prod["stock"]} left in stock.")
 
+    # User places order & handoff to main func 
         order_yn = input("Would you like to order this item? (y/n)")
         if order_yn == "y":
             print(f"Order placed. Thank you {username}!")
             user_order = (username, inv[order_num])
+            order_process = False 
+            return user_order
             
         if order_yn == "n":
             continue 
@@ -52,9 +55,11 @@ Price: {user_prod["price"]}
         
 
 
+
+
 running = True  #introducing a variable to loop the main function
 
-def main():
+def main(): 
     # Dictionary of models in inventory.
     inventory = {
         "PROD001": {'model': "Iphone 15 Pro Max", 'storage': "512GB", "price": 600, "stock": 550},
@@ -83,5 +88,6 @@ Please input the number associated with your choice: """)
 
         if user_direction == 1:
             place_order(inventory)
+            order_queue.append(user_order)
 
 main()
