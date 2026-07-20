@@ -7,14 +7,13 @@
 
 def place_order(inv):
     order_process = True
-    username = input("\nYou are placing an order. What's your name? ") 
+    username = input("\nYou are placing an order. What's your name? ")
 
     print(f"Welcome {username}! Here is the selection of products here at Apple:")
 
     while order_process:
     #Printing product list and prompting user to choose
         for prod_num, (product_id, prod_specs) in enumerate(inv.items(), start =1):
-            print(prod_specs)
             print(f"{prod_num}. {prod_specs["model"]}")
         order_num_input = input('Which product would you like to order? (Input the product number):  ')
         try:
@@ -32,34 +31,34 @@ def place_order(inv):
 
     #Describing info to user from product
         user_prod = inv[order_num]
-        print(f"""You chose the {user_prod["model"]}. 
+        print(f"""You chose the {user_prod["model"]}.
 Storage: {user_prod["storage"]}
 Price: {user_prod["price"]}
 """)
         if user_prod["stock"] < 100:
             print(f"Hurry, only {user_prod["stock"]} left in stock!")
-        else: 
+        else:
             print(f"{user_prod["stock"]} left in stock.")
 
-    # User places order & handoff to main func 
+    # User places order & handoff to main func
         order_yn = input("Would you like to order this item? (y/n)")
         if order_yn == "y":
             print(f"Order placed. Thank you {username}!")
             user_order = (username, inv[order_num])
-            order_process = False 
+            order_process = False
             return user_order
-            
+
         if order_yn == "n":
-            continue 
-            
-        
+            continue
+
+
 
 
 
 
 running = True  #introducing a variable to loop the main function
 
-def main(): 
+def main():
     # Dictionary of models in inventory.
     inventory = {
         "PROD001": {'model': "Iphone 15 Pro Max", 'storage': "512GB", "price": 600, "stock": 550},
@@ -91,6 +90,6 @@ Please input the number associated with your choice: """)
             if user_order is not None:
                 order_queue.append(user_order)
                 continue
-                
+
 
 main()
