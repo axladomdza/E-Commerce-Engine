@@ -30,7 +30,7 @@ def place_order(inv):
             continue
 
     #Describing info to user from product
-        user_prod = inv[order_num]
+        user_prod = inv[product_id] 
         print(f"""You chose the {user_prod["model"]}.
 Storage: {user_prod["storage"]}
 Price: {user_prod["price"]}
