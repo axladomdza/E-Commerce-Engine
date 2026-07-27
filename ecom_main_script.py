@@ -15,21 +15,24 @@ def place_order(inv):
     #Printing product list and prompting user to choose
         for prod_num, (product_id, prod_specs) in enumerate(inv.items(), start =1):
             print(f"{prod_num}. {prod_specs["model"]}")
+            numbed_inv = []
+            numbed_inv.append([prod_num])
         order_num_input = input('Which product would you like to order? (Input the product number):  ')
+        # User input error checking
         try:
             order_num = int(order_num_input)
         except ValueError:
             print("\nPlease select a number.")
             continue
 
-    #Error handling user input
+    # Exception Handling
         if 1 <= order_num <= len(inv):
-            print("\nNumber found." )
+            print("\nNumber found.")
         else:
             print("\nPlease input a number from the list of products.")
             continue
 
-    #Describing info to user from product
+    # Describing info to user from product
         user_prod = inv[product_id] 
         print(f"""You chose the {user_prod["model"]}.
 Storage: {user_prod["storage"]}
@@ -56,7 +59,7 @@ Price: {user_prod["price"]}
 
 
 
-running = True  #introducing a variable to loop the main function
+running = True  # Introducing a variable to loop the main function
 
 def main():
     # Dictionary of models in inventory.
