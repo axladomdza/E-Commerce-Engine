@@ -12,12 +12,12 @@ def place_order(inv):
     print(f"Welcome {username}! Here is the selection of products here at Apple:")
 
     while order_process:
+        
     #Printing product list and prompting user to choose
         for prod_num, (product_id, prod_specs) in enumerate(inv.items(), start =1):
             print(f"{prod_num}. {prod_specs["model"]}")
-            numbed_inv = []
-            numbed_inv.append([prod_num])
         order_num_input = input('Which product would you like to order? (Input the product number):  ')
+        
         # User input error checking
         try:
             order_num = int(order_num_input)
@@ -32,8 +32,8 @@ def place_order(inv):
             print("\nPlease input a number from the list of products.")
             continue
 
-    # Describing info to user from product
-        user_prod = inv[product_id] 
+    # Describing user's choice 
+        user_prod = inv[order_num]  
         print(f"""You chose the {user_prod["model"]}.
 Storage: {user_prod["storage"]}
 Price: {user_prod["price"]}
@@ -50,7 +50,6 @@ Price: {user_prod["price"]}
             user_order = (username, inv[order_num])
             order_process = False
             return user_order
-
         if order_yn == "n":
             continue
 
@@ -64,10 +63,10 @@ running = True  # Introducing a variable to loop the main function
 def main():
     # Dictionary of models in inventory.
     inventory = {
-        "PROD001": {'model': "Iphone 15 Pro Max", 'storage': "512GB", "price": 600, "stock": 550},
-        "PROD002": {'model': "Iphone 16", "storage" : "128GB", "price": 700, "stock": 260},
-        "PROD003": {'model': "Iphone 16 Pro", "storage" : "256GB", "price": 900, "stock": 400},
-        "PROD004": {'model': "Iphone 17 Pro Max", "storage": "512GB", "price": 1900, "stock": 500}}
+        1: {'model': "Iphone 15 Pro Max", 'storage': "512GB", "price": "$600", "stock": 550},
+        2: {'model': "Iphone 16", "storage" : "128GB", "price": "$700", "stock": 260},
+        3: {'model': "Iphone 16 Pro", "storage" : "256GB", "price": "$900", "stock": 400},
+        4: {'model': "Iphone 17 Pro Max", "storage": "512GB", "price": "$1900", "stock": 500}}
 
     order_queue = []
 
