@@ -3,7 +3,7 @@
 # Lists will be used for incoming orders
 # Sets will be used for unique customer names
 # Functions will be used for the actions of the customers
-#
+
 def place_order(inv):
     order_process = True
     username = input("\nYou are placing an order. What's your name? ")
@@ -47,8 +47,7 @@ Price: {user_prod["price"]}
         if order_yn == "y":
             print(f"\nOrder for {user_prod["model"]} placed. Thank you {username}!")
             user_order = (username, inv[order_num])
-            
-
+            user_prod["stock"] = user_prod["stock"] - 1
             order_process = False
             return user_order, username
         if order_yn == "n":
@@ -97,11 +96,8 @@ Please input the number associated with your choice: """)
             user_order, username = place_order(inventory)
             if user_order is not None:
                 order_queue.append(user_order)
-                print(order_queue)
                 customers.append(username)
                 unique_customers.add(username)
-                print(customers)
-                print(unique_customers)
                 continue
 
 
