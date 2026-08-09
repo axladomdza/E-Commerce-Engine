@@ -61,8 +61,10 @@ Price: {user_prod["price"]}
             continue
 
 def show_inventory(inv):
-    for prod_num, (prod_num1, prod_specs) in inv:
-        print(f"{}")
+    for prod_id, prod_specs in inv.items():
+        print(f"{prod_specs["model"]} --- Storage: {prod_specs["storage"]} --- Price: {prod_specs["price"]} --- Units left: {prod_specs["stock"]}\n")
+
+
 
 
 
