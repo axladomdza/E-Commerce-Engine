@@ -11,22 +11,24 @@ def place_order(inv):
     print(f"\nWelcome {username}! Here is the selection of products here at Apple:")
 
     while order_process:
-
+        print("\n")
     #Printing product list and prompting user to choose
-        for prod_num, (product_id, prod_specs) in enumerate(inv.items(), start =1):
-            print(f"{prod_num}. {prod_specs["model"]}")
-        order_num_input = input('Which product would you like to order? (Input the product number):  ')
+        for prod_num, (prod_id, prod_specs) in enumerate(inv.items(), start =1):
+            print(f"{prod_id}. {prod_specs["model"]}")
+        order_num_input = input('Which product would you like to order? (Input the product number) (e to exit):  ')
+
+        if order_num_input == ("e"):
+            return 'None', 'None'
 
         # User input error checking
         try:
             order_num = int(order_num_input)
         except ValueError:
-            print("\nPlease select a number.")
+            print("\nPlease select a number or 'e' to exit")
             continue
-
     # Exception Handling
         if 1 <= order_num <= len(inv):
-            print("\nNumber found.")
+            print("\nProduct found.")
         else:
             print("\nPlease input a number from the list of products.")
             continue
@@ -43,18 +45,26 @@ Price: {user_prod["price"]}
             print(f"{user_prod["stock"]} left in stock.")
 
     # User places order & handoff to main func
-        order_yn = input("Would you like to order this item? (y/n)")
-        if order_yn == "y":
-            print(f"\nOrder for {user_prod["model"]} placed. Thank you {username}!")
-            user_order = (username, inv[order_num])
-            user_prod["stock"] = user_prod["stock"] - 1
-            order_process = False
-            return user_order, username
-        if order_yn == "n":
+        while True:
+            order_yn = input("Would you like to order this item? (y/n): ")
+            if order_yn == "y":
+                print(f"\nOrder for {user_prod["model"]} placed. Thank you {username}!")
+                user_order = (username, inv[order_num])
+                user_prod["stock"] = user_prod["stock"] - 1
+                order_process = False
+                return user_order, username
+            if order_yn == "n":
+                break
+
+            else:
+                print("\nPlease enter either y or n")
             continue
-        else:
-            print("Please enter either y or n")
-            continue
+
+def show_inventory(inv):
+    for prod_num, (prod_num1, prod_specs) in inv:
+        print(f"{}")
+
+
 
 
 
@@ -77,9 +87,8 @@ def main():
 
     unique_customers = set(customers)
 
-    print("You're placing an order. Which Iphone fits best for you:")
     while running:      #using earlier variable for the loop
-        user_direction_input = input("""Welcome to Apple.com, would you like to:
+        user_direction_input = input("""\nWelcome to Apple.com, would you like to:
 
 1. Place an order
 2. View our inventory
@@ -99,6 +108,9 @@ Please input the number associated with your choice: """)
                 customers.append(username)
                 unique_customers.add(username)
                 continue
+
+        if user_direction == 2:
+            show_inventory(inventory)
 
 
 main()
