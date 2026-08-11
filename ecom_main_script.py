@@ -66,10 +66,10 @@ def show_inventory(inv):
 
 
 
-
 running = True  # Introducing a variable to loop the main function
-running_user = False
-running_admin = False
+running_user = True
+running_admin = True
+running_pswd = True
 
 def main():
     # Dictionary of models in inventory.
@@ -86,80 +86,93 @@ def main():
     unique_customers = set(customers)
 
     while running: # using var for loop
+        print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
         user_dir_1st_input = input("""\nWelcome to Apple.com, would you like to:
 
-1. Go to store
-2. Enter password (if admin)
+    1. Go to store
+    2. Enter password (if admin)
 
-Please input the number associated with your choice: """)
+Please input the number associated with your choice (q to quit): """)
+        if user_dir_1st_input == "q":
+            print("\n Thank you for visiting Apple. We hope to see you again soon.")
+            return
+
         try:
             user_1st_dir = int(user_dir_1st_input)
         except ValueError:
-            print("Please input a number")
+            print("\n Please input a number or 'q' to quit.")
             continue
 
 
         if user_1st_dir == 1:   # Now in the user section
-            running_user = True
-            user_dir_input = input("""\nWelcome to Apple.com, would you like to:
-    
+            while running_user:
+                print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+                customer_dir_input = input("""\nWelcome to the Apple Store, would you like to:
+
     1. Place an order
     2. View our inventory
-    
-    Please input the number associated with your choice: """)
-            try:
-                user_dir = int(user_dir_input)
-            except ValueError:
-                print("Please input a number.")
-                continue
 
-            if user_dir == 1:
-                user_order, username = place_order(inventory)
-                if user_order is not None:
-                    order_queue.append(user_order)
-                    customers.append(username)
-                    unique_customers.add(username)
-                    continue
-            if user_dir == 2:
-                show_inventory(inventory)
-
-
-                
-        if user_1st_dir == 2: # Now in the admin section
-            password = input("Input your password")
-            
-            if password == "e-comscript105":
-                running_admin = True
-                admin_dir_input = input("""\nWelcome Admin! Would you like to:
-        
-    1. View customer queue
-    2. View our inventory
-    3. View unique customers
-        
-        Please input the number associated with your choice: (e to exit)""")
-
-                if admin_dir_input == "e":
-                    running_admin = False
-                
+Please input the number associated with your choice (e to exit): """)
+                if customer_dir_input == "e":
+                    print("\nYou are exiting to the main menu...")
+                    break
                 try:
-                    admin_dir = int(admin_dir_input)
+                    customer_dir = int(customer_dir_input)
                 except ValueError:
-                    print("Please input a number or e to exit")
+                    print("Please input a number.")
                     continue
 
-                # if admin_dir == 1:
-                    # Print Customer queue
+                if customer_dir == 1:
+                    user_order, username = place_order(inventory)
+                    if user_order is not None:
+                        order_queue.append(user_order)
+                        customers.append(username)
+                        unique_customers.add(username)
+                        continue
+                if customer_dir == 2:
+                    show_inventory(inventory)
 
-                # if admin_dir == 2:
-                    # Print inventory
 
-                # if admin_dir == 3:
-                    # Print unique customers
-                
-            else:
-                print("Please input the correct password.")
-                continue
-            
+        if user_1st_dir == 2: # Now in the admin section
+            while running_pswd:
+                password = input("Input your password (e to exit): ")
+
+                if password == "e":
+                    print("Returning to the main menu.")
+                    break
+
+                if password == "e-comscript105":
+                    while running_admin:
+                        admin_dir_input = input("""\nWelcome Admin! Would you like to:
+
+        1. View customer queue
+        2. View our inventory
+        3. View unique customers
+
+Please input the number associated with your choice: (e to exit)""")
+
+                        if admin_dir_input == "e":
+                            break
+
+                        try:
+                            admin_dir = int(admin_dir_input)
+                        except ValueError:
+                            print("Please input a number or e to exit")
+                            continue
+
+                        # if admin_dir == 1:
+                            # Print Customer queue
+
+                        # if admin_dir == 2:
+                            # Print inventory
+
+                        # if admin_dir == 3:
+                            # Print unique customers
+
+                else:
+                    print("Please input the correct password.")
+                    continue
+
 
 
 main()
