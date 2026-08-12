@@ -18,7 +18,7 @@ def place_order(inv):
         order_num_input = input('Which product would you like to order? (Input the product number) (e to exit):  ')
 
         if order_num_input == ("e"):
-            return 'None', 'None'
+            break
 
         # User input error checking
         try:
