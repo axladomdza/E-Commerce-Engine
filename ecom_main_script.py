@@ -7,18 +7,18 @@
 def place_order(inv):
     order_process = True
     username = input("\nYou are placing an order. What's your name? ")
-
     print(f"\nWelcome {username}! Here is the selection of products here at Apple:")
-
-    while order_process:
+    while order_process:    # Using bool var for loop
         print("\n")
-    #Printing product list and prompting user to choose
+
+    # Printing product list and prompting user to choose
         for prod_num, (prod_id, prod_specs) in enumerate(inv.items(), start =1):
             print(f"{prod_id}. {prod_specs["model"]}")
         order_num_input = input('Which product would you like to order? (Input the product number) (e to exit):  ')
 
-        if order_num_input == ("e"):
-            break
+        if order_num_input == ("e"):    # Exiting "place_order" func
+            return None, None
+
 
         # User input error checking
         try:
@@ -26,14 +26,17 @@ def place_order(inv):
         except ValueError:
             print("\nPlease select a number or 'e' to exit")
             continue
-    # Exception Handling
+
+
+        # Exception Handling
         if 1 <= order_num <= len(inv):
             print("\nProduct found.")
         else:
             print("\nPlease input a number from the list of products.")
             continue
 
-    # Describing user's choice
+
+        # Describing user's choice
         user_prod = inv[order_num]
         print(f"""You chose the {user_prod["model"]}.
 Storage: {user_prod["storage"]}
@@ -44,7 +47,9 @@ Price: {user_prod["price"]}
         else:
             print(f"{user_prod["stock"]} left in stock.")
 
-    # User places order & handoff to main func
+
+
+        # User places order & handoff to main func
         while True:
             order_yn = input("Would you like to order this item? (y/n): ")
             if order_yn == "y":
@@ -128,8 +133,8 @@ Please input the number associated with your choice (e to exit): """)
                         order_queue.append(user_order)
                         customers.append(username)
                         unique_customers.add(username)
-                        continue
-                if customer_dir == 2:
+
+                elif customer_dir == 2:
                     show_inventory(inventory)
 
 
@@ -141,7 +146,7 @@ Please input the number associated with your choice (e to exit): """)
                     print("Returning to the main menu.")
                     break
 
-                if password == "e-comscript105":
+                if password == "ecomscript105":
                     while running_admin:
                         admin_dir_input = input("""\nWelcome Admin! Would you like to:
 
