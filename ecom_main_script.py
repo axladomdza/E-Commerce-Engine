@@ -11,9 +11,9 @@ def place_order(inv):
     while order_process:    # Using bool var for loop
         print("\n")
 
-    # Printing product list and prompting user to choose
-        for prod_num, (prod_id, prod_specs) in enumerate(inv.items(), start =1):
+        for prod_id, prod_specs in inv.items():
             print(f"{prod_id}. {prod_specs["model"]}")
+
         order_num_input = input('Which product would you like to order? (Input the product number) (e to exit):  ')
 
         if order_num_input == ("e"):    # Exiting "place_order" func
@@ -29,7 +29,7 @@ def place_order(inv):
 
 
         # Exception Handling
-        if 1 <= order_num <= len(inv):
+        if order_num in inv:
             print("\nProduct found.")
         else:
             print("\nPlease input a number from the list of products.")
