@@ -35,35 +35,56 @@ def place_order(inv):
             print("\nPlease input a number from the list of products.")
             continue
 
+        user_prod = inv[order_num]      # User order is now fully loaded
 
-        # Describing user's choice
-        user_prod = inv[order_num]
-        print(f"""You chose the {user_prod["model"]}.
+        usrinput_loop = True
+
+        while usrinput_loop:
+            # User orders amount of units and sees stock price
+            user_units_input = input(f"\nHow many units would you like to buy? There are {user_prod["stock"]} units in stock. (Enter a number): ")
+            try:
+                user_units = int(user_units_input)
+            except ValueError:
+                print("Please select a number.")
+                continue
+
+            if user_units <= 0:
+                print("Please select a valid number of units.")
+                continue
+
+            if user_prod["stock"] - user_units <= 0:
+                print("\n We do not have enough stock. Please select a number of units that we currently have.")
+                continue
+
+            usrinput_loop = False
+
+
+
+            # Describing user's choice
+            print(f"""\nYou chose the {user_prod["model"]}.
 Storage: {user_prod["storage"]}
 Price: {user_prod["price"]}
-""")
-        if user_prod["stock"] < 100:
-            print(f"Hurry, only {user_prod["stock"]} left in stock!")
-        else:
-            print(f"{user_prod["stock"]} left in stock.")
-
+Units: {user_units}
+    """)
+            if user_prod["stock"] < 100:
+                print(f"Hurry, only {user_prod["stock"]} left in stock!")
 
 
         # User places order & handoff to main func
-        while True:
-            order_yn = input("Would you like to order this item? (y/n): ")
-            if order_yn == "y":
-                print(f"\nOrder for {user_prod["model"]} placed. Thank you {username}!")
-                user_order = (username, inv[order_num])
-                user_prod["stock"] = user_prod["stock"] - 1
-                order_process = False
-                return user_order, username
-            if order_yn == "n":
-                break
+            while True:
+                order_yn = input("Would you like to order this item? (y/n): ")
+                if order_yn == "y":
+                    print(f"\nOrder for {user_prod["model"]} placed. Thank you {username}!")
+                    user_order = (username, inv[order_num])
+                    user_prod["stock"] = user_prod["stock"] - user_units
+                    order_process = False
+                    return user_order, username
+                if order_yn == "n":
+                    break
 
-            else:
-                print("\nPlease enter either y or n")
-            continue
+                else:
+                    print("\nPlease enter either y or n")
+                continue
 
 def show_inventory(inv):
     for prod_id, prod_specs in inv.items():
