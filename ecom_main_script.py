@@ -63,8 +63,9 @@ def place_order(inv):
             # Describing user's choice
             print(f"""\nYou chose the {user_prod["model"]}.
 Storage: {user_prod["storage"]}
-Price: {user_prod["price"]}
+Price: ${user_prod["price"]}
 Units: {user_units}
+Final Price: ${user_prod["price"] * user_units}
     """)
             if user_prod["stock"] < 100:
                 print(f"Hurry, only {user_prod["stock"]} left in stock!")
@@ -88,7 +89,7 @@ Units: {user_units}
 
 def show_inventory(inv):
     for prod_id, prod_specs in inv.items():
-        print(f"{prod_specs["model"]} --- Storage: {prod_specs["storage"]} --- Price: {prod_specs["price"]} --- Units left: {prod_specs["stock"]}\n")
+        print(f"{prod_specs["model"]} --- Storage: {prod_specs["storage"]} --- Price: ${prod_specs["price"]} --- Units left: {prod_specs["stock"]}\n")
 
 
 
@@ -100,10 +101,10 @@ running_pswd = True
 def main():
     # Dictionary of models in inventory.
     inventory = {
-        1: {'model': "Iphone 15 Pro Max", 'storage': "512GB", "price": "$600", "stock": 550},
-        2: {'model': "Iphone 16", "storage" : "128GB", "price": "$700", "stock": 260},
-        3: {'model': "Iphone 16 Pro", "storage" : "256GB", "price": "$900", "stock": 400},
-        4: {'model': "Iphone 17 Pro Max", "storage": "512GB", "price": "$1900", "stock": 500}}
+        1: {'model': "Iphone 15 Pro Max", 'storage': "512GB", "price": 600, "stock": 550},
+        2: {'model': "Iphone 16", "storage" : "128GB", "price": 700, "stock": 260},
+        3: {'model': "Iphone 16 Pro", "storage" : "256GB", "price": 900, "stock": 400},
+        4: {'model': "Iphone 17 Pro Max", "storage": "512GB", "price": 1900, "stock": 500}}
 
     order_queue = []
 
