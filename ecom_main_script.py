@@ -5,10 +5,9 @@
 # Functions will be used for the actions of the customers
 
 def place_order(inv):
-    order_process = True
     username = input("\nYou are placing an order. What's your name? ")
     print(f"\nWelcome {username}! Here is the selection of products here at Apple:")
-    while order_process:    # Using bool var for loop
+    while True:
         print("\n")
 
         for prod_id, prod_specs in inv.items():
@@ -37,9 +36,7 @@ def place_order(inv):
 
         user_prod = inv[order_num]      # User order is now fully loaded
 
-        usrinput_loop = True
-
-        while usrinput_loop:
+        while True:
             # User orders amount of units and sees stock price
             user_units_input = input(f"\nHow many units would you like to buy? There are {user_prod["stock"]} units in stock. (Enter a number): ")
             try:
@@ -55,8 +52,6 @@ def place_order(inv):
             if user_prod["stock"] - user_units <= 0:
                 print("\n We do not have enough stock. Please select a number of units that we currently have.")
                 continue
-
-            usrinput_loop = False
 
 
 
@@ -78,25 +73,18 @@ Final Price: ${user_prod["price"] * user_units}
                     print(f"\nOrder for {user_prod["model"]} placed. Thank you {username}!")
                     user_order = (username, inv[order_num])
                     user_prod["stock"] = user_prod["stock"] - user_units
-                    order_process = False
                     return user_order, username
                 if order_yn == "n":
                     break
 
                 else:
                     print("\nPlease enter either y or n")
-                continue
+                    continue
 
 def show_inventory(inv):
     for prod_id, prod_specs in inv.items():
         print(f"{prod_specs["model"]} --- Storage: {prod_specs["storage"]} --- Price: ${prod_specs["price"]} --- Units left: {prod_specs["stock"]}\n")
 
-
-
-running = True  # Introducing a variable to loop the main function
-running_user = True
-running_admin = True
-running_pswd = True
 
 def main():
     # Dictionary of models in inventory.
@@ -112,7 +100,7 @@ def main():
 
     unique_customers = set(customers)
 
-    while running: # using var for loop
+    while True: # using var for loop
         print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
         user_dir_1st_input = input("""\nWelcome to Apple.com, would you like to:
 
@@ -161,7 +149,7 @@ Please input the number associated with your choice (e to exit): """)
 
 
         if user_1st_dir == 2: # Now in the admin section
-            while running_pswd:
+            while True:
                 password = input("Input your password (e to exit): ")
 
                 if password == "e":
@@ -169,7 +157,7 @@ Please input the number associated with your choice (e to exit): """)
                     break
 
                 if password == "ecomscript105":
-                    while running_admin:
+                    while True:
                         admin_dir_input = input("""\nWelcome Admin! Would you like to:
 
         1. View customer queue
