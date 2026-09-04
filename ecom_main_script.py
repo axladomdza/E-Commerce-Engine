@@ -1,9 +1,3 @@
-# For this project we are creating an E-Commerce Engine for Apple that trakcs orders from customers and also keeps an inventory (dictionary) in check
-# Dictonaries will be used for the inventory
-# Lists will be used for incoming orders
-# Sets will be used for unique customer names
-# Functions will be used for the actions of the customers
-
 def place_order(inv):
     username = input("\nYou are placing an order. What's your name? ")
     print(f"\nWelcome {username}! Here is the selection of products here at Apple:")
@@ -100,7 +94,7 @@ def main():
 
     unique_customers = set(customers)
 
-    while True: # using var for loop
+    while True: 
         print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
         user_dir_1st_input = input("""\nWelcome to Apple.com, would you like to:
 
