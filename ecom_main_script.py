@@ -120,7 +120,7 @@ Please input the number associated with your choice (q to quit): """)
 
 
         if user_1st_dir == 1:   # Now in the user section
-            while running_user:
+            while True:
                 print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
                 customer_dir_input = input("""\nWelcome to the Apple Store, would you like to:
 
