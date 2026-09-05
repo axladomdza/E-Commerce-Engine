@@ -90,11 +90,9 @@ def main():
 
     order_queue = []
 
-    customers = []
+    customers = set()
 
-    unique_customers = set(customers)
-
-    while True: 
+    while True:
         print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
         user_dir_1st_input = input("""\nWelcome to Apple.com, would you like to:
 
@@ -135,8 +133,7 @@ Please input the number associated with your choice (e to exit): """)
                     user_order, username = place_order(inventory)
                     if user_order is not None:
                         order_queue.append(user_order)
-                        customers.append(username)
-                        unique_customers.add(username)
+                        customers.add(username)
 
                 elif customer_dir == 2:
                     show_inventory(inventory)
@@ -154,9 +151,9 @@ Please input the number associated with your choice (e to exit): """)
                     while True:
                         admin_dir_input = input("""\nWelcome Admin! Would you like to:
 
-        1. View customer queue
-        2. View our inventory
-        3. View unique customers
+1. View customer queue
+2. View our inventory
+3. View customers
 
 Please input the number associated with your choice: (e to exit)""")
 
@@ -169,14 +166,14 @@ Please input the number associated with your choice: (e to exit)""")
                             print("Please input a number or e to exit")
                             continue
 
-                        # if admin_dir == 1:
-                            # Print Customer queue
+                        if admin_dir == 1:
+                            print(order_queue)
 
-                        # if admin_dir == 2:
-                            # Print inventory
-
-                        # if admin_dir == 3:
-                            # Print unique customers
+                        if admin_dir == 2:
+                            show_inventory(inventory)
+                            
+                        if admin_dir == 3:
+                            print(customers)
 
                 else:
                     print("Please input the correct password.")
