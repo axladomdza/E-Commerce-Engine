@@ -5,7 +5,7 @@ def place_order(inv):
         print("\n")
 
         for prod_id, prod_specs in inv.items():
-            print(f"{prod_id}. {prod_specs["model"]}")
+            print(f"{prod_id}. {prod_specs['model']}")
 
         order_num_input = input('Which product would you like to order? (Input the product number) (e to exit):  ')
 
@@ -50,14 +50,14 @@ def place_order(inv):
 
 
             # Describing user's choice
-            print(f"""\nYou chose the {user_prod["model"]}.
-Storage: {user_prod["storage"]}
-Price: ${user_prod["price"]}
+            print(f"""\nYou chose the {user_prod['model']}.
+\nStorage: {user_prod['storage']}
+Price: ${user_prod['price']}
 Units: {user_units}
-Final Price: ${user_prod["price"] * user_units}
+Final Price: ${user_prod['price'] * user_units}
     """)
-            if user_prod["stock"] < 100:
-                print(f"Hurry, only {user_prod["stock"]} left in stock!")
+            if user_prod['stock'] < 100:
+                print(f"Hurry, only {user_prod['stock']} left in stock!")
 
 
         # User places order & handoff to main func
@@ -65,19 +65,19 @@ Final Price: ${user_prod["price"] * user_units}
                 order_yn = input("Would you like to order this item? (y/n): ")
                 if order_yn == "y":
                     print(f"\nOrder for {user_prod["model"]} placed. Thank you {username}!")
-                    user_order = (username, inv[order_num])
-                    user_prod["stock"] = user_prod["stock"] - user_units
+                    user_order = (username, inv[order_num], user_units, ({user_prod['price'] * user_units}))
+                    user_prod['stock'] = user_prod['stock'] - user_units
                     return user_order, username
                 if order_yn == "n":
                     break
 
                 else:
                     print("\nPlease enter either y or n")
-                    continue
+
 
 def show_inventory(inv):
     for prod_id, prod_specs in inv.items():
-        print(f"{prod_specs["model"]} --- Storage: {prod_specs["storage"]} --- Price: ${prod_specs["price"]} --- Units left: {prod_specs["stock"]}\n")
+        print(f"\n{prod_specs["model"]} --- Storage: {prod_specs["storage"]} --- Price: ${prod_specs["price"]} --- Units left: {prod_specs["stock"]}\n")
 
 
 def main():
@@ -171,7 +171,7 @@ Please input the number associated with your choice: (e to exit)""")
 
                         if admin_dir == 2:
                             show_inventory(inventory)
-                            
+
                         if admin_dir == 3:
                             print(customers)
 
