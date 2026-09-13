@@ -28,7 +28,8 @@ def place_order(inv):
             print("\nPlease input a number from the list of products.")
             continue
 
-        user_prod = inv[order_num]      # User order is now fully loaded
+        current_inv = inv[order_num]
+        user_prod = current_inv.copy()
 
         while True:
             # User orders amount of units and sees stock price
@@ -65,8 +66,8 @@ Final Price: ${user_prod['price'] * user_units}
                 order_yn = input("Would you like to order this item? (y/n): ")
                 if order_yn == "y":
                     print(f"\nOrder for {user_prod["model"]} placed. Thank you {username}!")
-                    user_order = (username, inv[order_num], user_units, ({user_prod['price'] * user_units}))
-                    user_prod['stock'] = user_prod['stock'] - user_units
+                    user_order = (username, user_prod, user_units, ({user_prod['price'] * user_units}))
+                    current_inv['stock'] = current_inv['stock'] - user_units
                     return user_order, username
                 if order_yn == "n":
                     break
